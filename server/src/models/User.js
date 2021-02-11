@@ -31,8 +31,37 @@ class User extends uniqueFunc(Model) {
       properties: {
         email: { type: "string" },
         cryptedPassword: { type: "string" },
+        admin: { type: "boolean"},
+        userName: {type: "string"}
       },
     };
+  }
+
+  static get relationMappings() {
+    const { Message } = require("./index")
+
+    return {
+      sender: {
+        relation: Model.HasManyRelation,
+        modelClass: Message,
+        join: {
+          from: "users.id",
+          to: "messages.senderId",
+        },
+      },
+
+      receiver: {
+        relation: Model.HasManyRelation,
+        modelClass: Message,
+        join: {
+          from: "users.id",
+          to: "messages.receiverId",
+        },
+      },
+      
+    }
+
+    
   }
 
   $formatJson(json) {
