@@ -13,4 +13,28 @@ goodsRouter.get("/", async (req, res) => {
   }
 })
 
+goodsRouter.post("/", async (req, res) => {
+  const newPostData  = req.body
+  console.log(newPostData);
+  const {userId, title, description, quantity, locationLat, locationLong, image} = newPostData
+  console.log(description, title); 
+  
+
+  try {
+    const newGood = await Good.query().insertAndFetch({
+      userId,
+      title,
+      description,
+      quantity, 
+      locationLat,
+      locationLong,
+      image
+    })
+    return res.status(201).json({good: newGood})  
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({errors: error})
+  }
+})
+
 export default goodsRouter
