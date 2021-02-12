@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from "react"
 import { useParams, Link } from "react-router-dom"
+import GoodTile from "./GoodTile"
 
 const GoodsShowTile = (props) => {
   const [goods, setGoods] = useState([])
@@ -15,16 +16,21 @@ const GoodsShowTile = (props) => {
   }
   useEffect(() => {
     getGoods()
-  })
+  }, [])
   
   const goodsListItems = goods.map((goodItem) => {
     return (
-      <GoodTile goodItem={goodItem}/>
+      <GoodTile key={goodItem.id} goodItem={goodItem}/>
     )
   })
 
+
+
   return (
-    <div>{goodsListItems}</div>
+    <div>
+      <h1>JUST TAKE IT</h1>
+      {goodsListItems}
+    </div>
   )
 }
 
