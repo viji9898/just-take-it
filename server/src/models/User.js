@@ -59,6 +59,15 @@ class User extends uniqueFunc(Model) {
         },
       },
       
+            goods: {
+        relation: Model.HasManyRelation,
+        modelClass: Good,
+        join:{
+          from: "users.id",
+          to: "goods.userId"
+        }
+      }
+      
     }
 
     
