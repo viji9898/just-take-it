@@ -15,14 +15,14 @@ class Message extends Model {
     }
   }
   static get relationMappings() {
-    const { User } = require("./index")
+    const { User, Good } = require("./index")
 
     return {
       UserSend: {
         relation: Model.HasManyRelation,
         modelClass: User,
         join: {
-          from: "messages.id",
+          from: "messages.senderId",
           to: "users.sendId",
         },
       },
@@ -31,8 +31,17 @@ class Message extends Model {
         relation: Model.HasManyRelation,
         modelClass: User,
         join: {
-          from: "messages.id",
+          from: "messages.receiverId",
           to: "users.receiveId",
+        },
+      },
+
+      Good: {
+        relation: Model.HasManyRelation,
+        modelClass: Good,
+        join: {
+          from: "messages.goodId",
+          to: "goods.id",
         },
       },
     }
