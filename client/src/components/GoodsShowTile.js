@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom"
 import GoodTile from "./GoodTile"
 import GoodShowPage from"./GoodShowPage"
 import { Card, Col , Row} from 'antd';
+import GoodFormModal from "./GoodFormModal"
 
 const style = {padding: '8px 0' };
 
@@ -24,7 +25,6 @@ const GoodsShowTile = (props) => {
   
   const goodsListItems = goods.map((goodItem) => {
     return (
-
       <Col className="gutter-row" span={6}>
         <div style={style}></div>
         <GoodTile key={goodItem.id} goodItem={goodItem}/>
