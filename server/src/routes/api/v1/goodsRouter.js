@@ -1,5 +1,6 @@
 import express from "express"
 
+import GoodSerializer from "../../serializers/GoodSerializer.js"
 import { Good } from "../../../models/index.js"
 
 const goodsRouter = express.Router()
@@ -7,7 +8,15 @@ const goodsRouter = express.Router()
 goodsRouter.get("/", async (req, res) => {
   try {
     const goods = await Good.query()
-    return res.status(200).json({goods: goods})
+    const serializerGoods = []
+
+    for ( const good of goods){
+      const serializerGood = await GoodSerializer.getSummary(good)
+      console.log(serializerGood);
+      serializerGoods.push(serializerGood)
+    }
+
+    return res.status(200).json({goods: serializerGoods})
   } catch (error) {
     return res.status(500).json({errors: error})
   }
