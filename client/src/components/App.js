@@ -9,6 +9,9 @@ import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import MainShowPage from "./MainShowPage"
 
+import { Layout, Row, Col, Divider, Card, Modal, Collapse  } from 'antd';
+const { Header, Footer, Sider, Content,} = Layout
+
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
   useEffect(() => {
@@ -22,14 +25,29 @@ const App = (props) => {
   }, []);
   return (
     <Router>
-      <TopBar user={currentUser} />
-      <Switch>
-        <Route exact path="/" component={MainShowPage} />        
-        <Route exact path="/users/new" component={RegistrationForm} />
-        <Route exact path="/user-sessions/new" component={SignInForm} />
-      </Switch>
+      <Layout>
+        <Header style={{width:"100vw"}, {background:"#ffcccc"}}>
+        <TopBar user={currentUser} />
+        </Header>
+      <Layout>
+      <Sider style={{background:"#ffcccc"}}></Sider>
+      <Content style={{background:"#ffcccc"}}>
+        <Switch>
+          <Route exact path="/" component={MainShowPage} />        
+          <Route exact path="/users/new" component={RegistrationForm} />
+          <Route exact path="/user-sessions/new" component={SignInForm} />
+        </Switch>
+      </Content>
+      <Sider style={{background:"#ffcccc"}}>
+      </Sider>
+      </Layout>
+        <Footer>Footer</Footer>
+      </Layout>
     </Router>
+
   );
 };
 
 export default hot(App);
+
+

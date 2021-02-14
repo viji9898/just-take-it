@@ -1,13 +1,22 @@
 import React from "react"
 
 import GoodsShowTile from "./GoodsShowTile"
-import MessageShowTile from "./Messenger/MessageShowTile"
+
+
+import { Row, Divider, Col } from 'antd';
+
+const style = { background: '#0092ff', padding: '8px 0px' };
 
 const MainShowPage = (props) => {
-  return (<div>
+  return (
+    <>
+    <Divider orientation="left">
+      Freebies
+    </Divider>
     <GoodsShowTile/>
-    <MessageShowTile/>
-  </div>)
+    </>
+  )
 }
 
 export default MainShowPage
+

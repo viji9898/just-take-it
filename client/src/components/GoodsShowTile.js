@@ -2,6 +2,9 @@ import React, { useState, useEffect} from "react"
 import { useParams, Link } from "react-router-dom"
 import GoodTile from "./GoodTile"
 import GoodShowPage from"./GoodShowPage"
+import { Card, Col , Row} from 'antd';
+
+const style = {padding: '8px 0' };
 
 const GoodsShowTile = (props) => {
   const [goods, setGoods] = useState([])
@@ -21,7 +24,12 @@ const GoodsShowTile = (props) => {
   
   const goodsListItems = goods.map((goodItem) => {
     return (
-      <GoodTile key={goodItem.id} goodItem={goodItem}/>
+
+      <Col className="gutter-row" span={6}>
+        <div style={style}></div>
+        <GoodTile key={goodItem.id} goodItem={goodItem}/>
+      </Col>
+
     )
   })
 
@@ -32,13 +40,13 @@ const GoodsShowTile = (props) => {
   })
 
   return (
-    <div>
-      <h1>JUST TAKE IT</h1>
+    <Row gutter={16}>
       {goodsListItems}
-    </div>
+    </Row>
   )
 }
 
 
 
 export default GoodsShowTile
+
