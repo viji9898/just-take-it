@@ -22,6 +22,21 @@ class Good extends Model {
       }
     }
   }
+
+  static get relationMappings() {
+    const { Message } = require("./index")
+
+    return {
+      messages: {
+        relation: Model.HasManyRelation,
+        modelClass: Message,
+        join: {
+          from: "goods.id",
+          to: "messages.goodId",
+        },
+      },
+    }
+  }
 }
 
 module.exports = Good 
