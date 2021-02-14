@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { hot } from "react-hot-loader/root";
 
 import getCurrentUser from "../services/getCurrentUser";
@@ -8,8 +8,10 @@ import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import MainShowPage from "./MainShowPage"
+import GoodFormModal from "./GoodFormModal"
 
-import { Layout, Row, Col, Divider, Card, Modal, Collapse  } from 'antd';
+import { Layout, Button } from 'antd';
+import GoodForm from "./GoodForm";
 const { Header, Footer, Sider, Content,} = Layout
 
 const App = (props) => {
@@ -23,6 +25,8 @@ const App = (props) => {
         setCurrentUser(null);
       });
   }, []);
+
+
   return (
     <Router>
       <Layout>
@@ -32,6 +36,7 @@ const App = (props) => {
       <Layout>
       <Sider style={{background:"#ffcccc"}}></Sider>
       <Content style={{background:"#ffcccc"}}>
+        <GoodFormModal currentUser={currentUser}/>
         <Switch>
           <Route exact path="/" component={MainShowPage} />        
           <Route exact path="/users/new" component={RegistrationForm} />
