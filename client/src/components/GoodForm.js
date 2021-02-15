@@ -1,24 +1,66 @@
 import React, { useState } from "react"
+import Dropzone from "react-dropzone"
 
 const GoodForm =(props) => {
-  debugger
 
   const [goodRecord, setGoodRecord] = useState({
     title: "",
     description:"",
-    quantity:"", 
+    quantity:"",
+    image:{} 
+  })
+
+  const [uploadedImage, setUploadedImage] = useState({
+    preview: ""
   })
 
   const handleChange = (event) => {
+    event.preventDefault()
     setGoodRecord({
       ...goodRecord,
       [event.currentTarget.name]: event.currentTarget.value,
     })
   }
 
+  const handleImageUpload = (acceptedImage) => {
+    // sets state for the image we want to post
+    setGoodRecord({
+      ...goodRecord,
+      image: acceptedImage[0]
+    })
+
+    // sets state for a preview of the one uploaded image
+    setUploadedImage({
+      preview: URL.createObjectURL(acceptedImage[0])
+    })
+
+    // // example for preview multiple images
+    // setUploadedImage(acceptedImage.map(file => Object.assign(file, {
+    //   preview: URL.createObjectURL(file)
+    // })))
+  }
+
+  const clearForm = () => {
+    setGoodRecord({
+      title: "",
+      description:"",
+      quantity:"",
+      image:{} 
+    })
+    setUploadedImage({
+      preview: ""
+    })
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
-    props.addGood(goodRecord)
+    const body = new FormData()
+    body.append("title", goodRecord.title)
+    body.append("description", goodRecord.description)
+    body.append("quantity", goodRecord.quantity)
+    body.append("image", goodRecord.image)
+    props.addGood(body)
+    clearForm()
   }
 
   return (
@@ -64,6 +106,19 @@ const GoodForm =(props) => {
             />
           </label>
 
+          <Dropzone onDrop={handleImageUpload}>
+            {({getRootProps, getInputProps}) => (
+              <section>
+                <div {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  <p>Upload Your image - drag 'n' drop or click to upload</p>
+                </div>
+              </section>
+            )}
+          </Dropzone>
+          
+          <img src={uploadedImage.preview} />
+
           {/* <label htmlFor="description">
             Trail Description:
             <input
@@ -91,7 +146,11 @@ const GoodForm =(props) => {
           </label> */}
 
           <div>
-            <input className="button" type="submit" value="Submit" />
+            <input 
+              className="button" 
+              type="submit" 
+              value="Submit"
+            />
           </div>
         </form>
       </div>

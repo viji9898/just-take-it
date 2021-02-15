@@ -24,19 +24,19 @@ const GoodFormModal = (props) => {
     setIsModalVisible(false);
   };
 
-  const [goods, setGoods] = useState([props.goods])
+  // const [goods, setGoods] = useState([props.goods])
 
   const addGood = async (goodPayload) => {
     try {
       const response = await fetch("/api/v1/goods",{
         method: "POST",
-        headers: new Headers({
-          "Content-Type": "application/json",
-        }),
-        body: JSON.stringify(goodPayload),
+        // headers: {
+        //   "Accept": "image/png"
+        // },
+        body: goodPayload
       })
       const body = await response.json()
-      setGood(body.goods)
+
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
     }
