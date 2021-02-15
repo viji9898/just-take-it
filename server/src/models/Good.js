@@ -24,7 +24,7 @@ class Good extends Model {
   }
 
   static get relationMappings() {
-    const { Message } = require("./index")
+    const { Message, User } = require("./index")
 
     return {
       messages: {
@@ -35,6 +35,15 @@ class Good extends Model {
           to: "messages.goodId",
         },
       },
+
+      // user: {
+      //   relation: Model.HasOneRelation,
+      //   modelClass: User,
+      //   join: {
+      //     from: "goods.userId",
+      //     to: "user.id",
+      //   },
+      // }
     }
   }
 }

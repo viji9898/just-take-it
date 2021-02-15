@@ -1,7 +1,10 @@
 import express from "express"
+import multer from "multer"
+
 
 import GoodSerializer from "../../serializers/GoodSerializer.js"
 import { Good } from "../../../models/index.js"
+import uploadImage from "../../../services/uploadImage.js"
 
 const goodsRouter = express.Router()
 
@@ -22,20 +25,27 @@ goodsRouter.get("/", async (req, res) => {
   }
 })
 
-goodsRouter.post("/", async (req, res) => {
-  const newPostData  = req.body
-  console.log(newPostData);
-  const {title, description, quantity} = newPostData
-  console.log(description, title); 
-  
+// const uploadTest = multer({dest:"img/"})
 
+goodsRouter.post("/",uploadImage.single("image"), async (req, res) => {
+   
   try {
-    const newGood = await Good.query().insertAndFetch({
-      userId:"1",
+    console.log(req)
+    const {body, user} = req
+    const {title, description, quantity}  = body
+
+    const formData = {
       title,
       description,
-      quantity, 
-    })
+      quantity,
+      image: req.file.location, 
+      userId: user.id
+    } 
+  console.log(formData);
+    
+    // console.log(newPostData);
+
+    const newGood = await Good.query().insertAndFetch(formData)
     return res.status(201).json({good: newGood})  
   } catch (error) {
     console.log(error);

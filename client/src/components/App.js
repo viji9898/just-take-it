@@ -9,6 +9,8 @@ import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import MainShowPage from "./MainShowPage"
 import GoodFormModal from "./GoodFormModal"
+import UserPostShowPage from "./PostingConsole/UserPostShowPage"
+import MessageShowPage from "./Messenger/MessageShowPage"
 
 import { Layout, Button } from 'antd';
 import GoodForm from "./GoodForm";
@@ -43,7 +45,13 @@ const App = (props) => {
           <Route exact path="/user-sessions/new" component={SignInForm} />
         </Switch>
       </Content>
-      <Sider style={{background:"#ffcccc"}}>
+      <Sider style={{margin:100}}width={300} style={{background:"#ffcccc"}}>
+        <br/>
+        User Profile
+        <UserPostShowPage/>
+        <br/>
+        Message Center
+        <MessageShowPage/> 
       </Sider>
       </Layout>
         <Footer>Footer</Footer>

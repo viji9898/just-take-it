@@ -38,7 +38,7 @@ class User extends uniqueFunc(Model) {
   }
 
   static get relationMappings() {
-    const { Message } = require("./index")
+    const { Message, Good } = require("./index")
 
     return {
       sender: {
@@ -59,7 +59,7 @@ class User extends uniqueFunc(Model) {
         },
       },
       
-            goods: {
+      goods: {
         relation: Model.HasManyRelation,
         modelClass: Good,
         join:{
