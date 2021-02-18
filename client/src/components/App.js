@@ -11,6 +11,16 @@ import MainShowPage from "./MainShowPage"
 import GoodFormModal from "./GoodFormModal"
 import UserPostShowPage from "./PostingConsole/UserPostShowPage"
 import MessageShowPage from "./Messenger/MessageShowPage"
+import headImage from "../../images/AdobeStock_182267207_Preview.jpeg"
+import manStuffImage from "../../images/Freebie.png"
+import coolblue from "../../images/AdobeStock_305126590.jpeg"
+
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue, } from "recoil"
 
 import { Layout, Button } from 'antd';
 import GoodForm from "./GoodForm";
@@ -31,31 +41,35 @@ const App = (props) => {
 
   return (
     <Router>
-      <Layout>
-        <Header style={{width:"100vw"}, {background:"#ffcccc"}}>
-        <TopBar user={currentUser} />
-        </Header>
-      <Layout>
-      <Sider style={{background:"#ffcccc"}}></Sider>
-      <Content style={{background:"#ffcccc"}}>
-        <GoodFormModal currentUser={currentUser}/>
-        <Switch>
-          <Route exact path="/" component={MainShowPage} />        
-          <Route exact path="/users/new" component={RegistrationForm} />
-          <Route exact path="/user-sessions/new" component={SignInForm} />
-        </Switch>
-      </Content>
-      <Sider style={{margin:100}}width={300} style={{background:"#ffcccc"}}>
-        <br/>
-        User Profile
-        <UserPostShowPage/>
-        <br/>
-        Message Center
-        <MessageShowPage/> 
-      </Sider>
-      </Layout>
-        <Footer>Footer</Footer>
-      </Layout>
+      <RecoilRoot>
+        <Layout style={{backgroundImage: `url(${manStuffImage})`}}>
+          <Header style={{width:"100vw"}} style={{backgroundImage: `url(${coolblue})`}}>
+          <TopBar user={currentUser} />
+          </Header>
+        <Layout>
+        <Sider style={{backgroundImage: `url(${coolblue})`}}>
+        {/* <img src={manStuffImage}/> */}
+        </Sider>
+        <Content id="parent">
+          <img src={manStuffImage}/>
+          
+          <GoodFormModal currentUser={currentUser}/>
+          <Switch>
+            <Route exact path="/" component={MainShowPage} />        
+            <Route exact path="/users/new" component={RegistrationForm} />
+            <Route exact path="/user-sessions/new" component={SignInForm} />
+          </Switch>
+        </Content>
+        <Sider style={{margin:100}}width={300} style={{backgroundImage: `url(${coolblue})`}} >
+          <br/>
+          <UserPostShowPage/>
+          <br/>        
+          <MessageShowPage/> 
+        </Sider>
+        </Layout>
+          <Footer>DuckTech</Footer>
+        </Layout>
+      </RecoilRoot>
     </Router>
 
   );

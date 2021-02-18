@@ -4,7 +4,7 @@ import Dropzone from "react-dropzone"
 const GoodForm =(props) => {
 
   const [goodRecord, setGoodRecord] = useState({
-    title: "",
+    title:"",
     description:"",
     quantity:"",
     image:{} 
@@ -42,7 +42,7 @@ const GoodForm =(props) => {
 
   const clearForm = () => {
     setGoodRecord({
-      title: "",
+      title:"",
       description:"",
       quantity:"",
       image:{} 
@@ -61,6 +61,7 @@ const GoodForm =(props) => {
     body.append("image", goodRecord.image)
     props.addGood(body)
     clearForm()
+    props.closeModalOnSubmit()
   }
 
   return (
@@ -76,7 +77,7 @@ const GoodForm =(props) => {
               name="title"
               placeholder="title"
               onChange={handleChange}
-              value={goodRecord.name}
+              value={goodRecord.title}
             />
           </label>
 

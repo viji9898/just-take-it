@@ -3,18 +3,24 @@ import { useParams, Link } from "react-router-dom"
 import GoodTile from "./GoodTile"
 import GoodShowPage from"./GoodShowPage"
 import { Card, Col , Row} from 'antd';
-import GoodFormModal from "./GoodFormModal"
+import { useSetRecoilState, useRecoilState } from "recoil";
+import atomGoods from "../store/store"
 
 const style = {padding: '8px 0' };
 
 const GoodsShowTile = (props) => {
-  const [goods, setGoods] = useState([])
+  const [goodState, setGoodState] = useRecoilState(atomGoods)
 
+  const [goods, setGoods] = useState([])
+  // const [updateGoods, setUpdateGoods] = useState([])
+  // console.log(goodState)
   const getGoods = async () => {
     try {
       const response = await fetch("/api/v1/goods")
       const body = await response.json()
       setGoods(body.goods)
+      setGoodState([...body.goods])
+      // console.log(goodState);
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`)
     }
@@ -41,7 +47,7 @@ const GoodsShowTile = (props) => {
 
   return (
     <Row gutter={16}>
-      {goodsListItems}
+      {goodsListItems}    
     </Row>
   )
 }

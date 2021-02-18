@@ -1,11 +1,13 @@
 import React, { useState, useEffect} from "react"
+import { Modal, Divider, Form, Input, InputNumber, Button  } from 'antd';
+import MessageShowTile from "./MessageShowTile"
 
 const MessageShowPage = () => {
+
   return (
-    <ul>
-      <li>viji9898: PC Screen</li>
-      <li>samParks798: Sofa Set</li>
-    </ul>
+    <div>
+      <MessageShowTile/>
+    </div>
   )
 }
 

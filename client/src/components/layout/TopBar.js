@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SignOutButton from "../authentication/SignOutButton";
+import { Button } from 'antd';
 
 const TopBar = ({ user }) => {
   const unauthenticatedListItems = [
@@ -24,7 +25,7 @@ const TopBar = ({ user }) => {
     <div className="top-bar">
       <div className="top-bar-left">
         <ul className="menu">
-          <li className="menu-text">App</li>
+          <li className="menu-text"></li>
           <li>
             <Link to="/">Home</Link>
           </li>

@@ -53,4 +53,16 @@ goodsRouter.post("/",uploadImage.single("image"), async (req, res) => {
   }
 })
 
+goodsRouter.delete("/:goodId", async(req,res) => {
+  const goodId = req.params.goodId
+  console.log(goodId);
+  try {
+    const deleteGood = await Good.query().findById(goodId).delete()
+    return res.status(201)
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({errors: error})
+  }
+})
+
 export default goodsRouter
