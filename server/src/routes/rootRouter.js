@@ -14,6 +14,6 @@ rootRouter.use("/api/v1/users", usersRouter); //place your server-side routes he
 rootRouter.use("/api/v1/userprofile", userProfileRouter); //place your server-side routes here
 rootRouter.use("/api/v1/goods", goodsRouter)
 rootRouter.use("/api/v1/messages", messageRouter)
-rootRouter.use("/api/v1/messages", messageRouter)
+
 
 export default rootRouter;

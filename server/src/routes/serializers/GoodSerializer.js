@@ -1,6 +1,6 @@
 class GoodSerializer {
   static async getSummary(good){
-    const allowedAttributes = ["title", "description", "quantity", "image"]
+    const allowedAttributes = ["title", "description", "quantity", "image", "id"]
 
     let serializedGood = {}
     for (const attribute of allowedAttributes){

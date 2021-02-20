@@ -1,6 +1,8 @@
 import React, { useState, useEffect} from "react"
 import { useParams, Link } from "react-router-dom"
 import { Modal, Button } from 'antd';
+import GoodMessageModal from "./GoodMessageModal"
+
 
 const GoodShowPage = (props) => {
   
@@ -28,9 +30,11 @@ const GoodShowPage = (props) => {
       <Modal title={title} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}
       footer={[
         <>    
-        <Button key="back" onClick={handleCancel}  >
+        {/* <Button key="back" onClick={handleCancel}  >
            Return
-        </Button>
+        </Button> */}
+        <br/>
+        <GoodMessageModal/>
         </>
       ]}>
             <p>{description}</p>
